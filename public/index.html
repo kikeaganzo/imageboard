@@ -1,0 +1,123 @@
+<!doctype html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/stylesheet.css">
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:300,500" rel="stylesheet">
+</head>
+<body>
+
+    <h1>Orangeboard <img src="orange.png" alt="Title" height="35" width="35"> </h1>
+    <p>Upload your orange-coloured photo! </p>
+
+
+
+
+    <div id = "main">
+
+
+        <form class="form">
+        <input v-model = 'form.title' type = 'text' name ='title' placeholder="Title">
+        <input v-model = 'form.description' type = 'text' name ='description' placeholder="Description">
+        <input v-model = 'form.username' type = 'text' name ='username' placeholder="Username">
+        <input type = 'file' accept = 'image/*' name ='title' @change ='handleFileChange'>
+        <button @click = 'uploadFile'> upload! </button>
+    </form> <br>
+
+
+
+<div v-if="images.length" class="images-container">
+
+    <div class="item" v-for='image in images'>
+        <img :src="image.url" @click="open(image.id)">
+
+        <!-- Write a function en methods  FUNCTIONTOOPEN -->
+        <div class="description-title"> <p> {{ image.title }} </p></div>
+
+
+    </div></div>
+
+    <image-modal v-if="currentImage" :current-image="currentImage" @close="close"></image-modal>
+</div>
+
+
+<!-- //template OPENING PIC here  -->
+
+
+
+
+<script type="text/x-template" id="template">
+
+<div class="modal">
+ <div class="close-button" @click="$emit('close')">CLOSE</div>
+<div class="modal-img-2"><img class = "modal-img" :src="clickImage.url"></div>
+<div class="description-title"><p>
+    <img src="title.png" alt="Title" height="16" width="16"> {{clickImage.title }}
+    <p><img src="user-icon.png" alt="Comments" height="16" width="16"> {{ clickImage.username }}
+    </p></div>
+
+
+<div class ="form-comments">
+<form class="form">
+<input v-model = 'form.usercomment' type = 'text' name ='comment' placeholder="Comment">
+<input v-model = 'form.username' type = 'text' name ='username' placeholder="Username">
+<button @click='addComment'> Insert comment </button>
+
+
+</form></div>
+
+<div class="commentdisplay"> <div v-for ="comment in comments">
+        <p><img src="comments-icon.png" alt="Comments" height="16" width="16"> {{comment.comment }} |  <img src="user-icon.png" alt="Comments" height="16" width="16"> {{ comment.username }}  </p>
+            <!-- <p> Upladed by {{ username.comments }}</p> -->
+
+    </div> </div>
+
+</div>
+
+                    <!-- <strong><p>{{image.title}}</p></strong>
+                    <p>{{image.description}}</p>
+                    <p>UPLOADED BY {{username}} at {{time}}</p> --> -->
+            <!-- </div>
+
+
+
+</div>
+</script>
+
+
+
+<!--
+
+<!-- all of the HTML here is linked or bound to Vue -->
+        <!-- <p>{{ name.first }}</p>
+
+        <p>{{ name.last }}</p>
+
+        <!-- this is inside of #main -->
+        <!-- <ul v-for = 'city in cities'>
+            <li>{{ city.name }}, {{ city.country }}
+        </ul>
+
+        <p v-if = 'cities.length === 0'>no cities.... :(</p> -->
+
+
+        <!-- click events in vue  -->
+        <!-- <h3 @click = 'myFn' >clicking is fun!!!!</h3> -->
+        <!-- <h3 v-on:click = ''> -->
+
+
+
+
+
+
+    <!-- this is where #main closes -->
+    <!-- </div> -->
+
+
+
+    <script src="/js/vue.js"></script>
+    <script src="/js/axios.min.js"></script>
+    <script src = "/js/script.js"></script>
+
+</body>
+</html>
